@@ -16,8 +16,8 @@ public class HelloWorldController {
 	public HelloWorld greeting(@RequestParam(value = "name", defaultValue = "World") 
 		String name) {
 		
-		return new HelloWorld(counter.incrementAndGet(), name);
+		return new HelloWorld(counter.incrementAndGet(), String.format(template, name));
 		
-	}
+	}		
 	
 }

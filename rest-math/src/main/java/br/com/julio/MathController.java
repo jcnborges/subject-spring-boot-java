@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.julio.exception.UnsupportedMathOperationException;
+
 @RestController
 public class MathController {
 
@@ -12,9 +14,9 @@ public class MathController {
 			method = RequestMethod.GET)
 	public Double sum(
 			@PathVariable(value = "numberOne") String numberOne, 
-			@PathVariable(value = "numberTwo") String numberTwo) throws NumberFormatException {		
+			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {		
 		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
-			throw new NumberFormatException();
+			throw new UnsupportedMathOperationException("Please set a numeric value");
 		}
 		
 		return convertToDouble(numberOne) + convertToDouble(numberTwo);		
@@ -24,9 +26,9 @@ public class MathController {
 			method = RequestMethod.GET)
 	public Double sub(
 			@PathVariable(value = "numberOne") String numberOne,
-			@PathVariable(value = "numberTwo") String numberTwo) throws NumberFormatException {
+			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
 		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
-			throw new NumberFormatException();
+			throw new UnsupportedMathOperationException("Please set a numeric value");
 		}
 		
 		return convertToDouble(numberOne) - convertToDouble(numberTwo);
@@ -36,9 +38,9 @@ public class MathController {
 			method = RequestMethod.GET)
 	public Double mul(
 			@PathVariable(value = "numberOne") String numberOne,
-			@PathVariable(value = "numberTwo") String numberTwo) throws NumberFormatException {
+			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
 		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
-			throw new NumberFormatException();
+			throw new UnsupportedMathOperationException("Please set a numeric value");
 		}
 		
 		return convertToDouble(numberOne) * convertToDouble(numberTwo);
@@ -48,9 +50,9 @@ public class MathController {
 			method = RequestMethod.GET)
 	public Double div(
 			@PathVariable(value = "numberOne") String numberOne,
-			@PathVariable(value = "numberTwo") String numberTwo) throws NumberFormatException {
+			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
 		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
-			throw new NumberFormatException();
+			throw new UnsupportedMathOperationException("Please set a numeric value");
 		}
 		
 		return convertToDouble(numberOne) / convertToDouble(numberTwo);

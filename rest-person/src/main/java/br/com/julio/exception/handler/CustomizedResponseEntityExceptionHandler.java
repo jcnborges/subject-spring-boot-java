@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.julio.exception.ExceptionResponse;
+import br.com.julio.exception.ResourceNotFoundException;
 
 @ControllerAdvice
 @RestController
@@ -24,6 +25,16 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 			request.getDescription(false)
 		);
 		return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+	}	
+	
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public final ResponseEntity<ExceptionResponse> handleResourceNotFoundExceptions(Exception ex, WebRequest request) {
+		ExceptionResponse exceptionResponse = new ExceptionResponse(
+			new Date(), 
+			ex.getMessage(), 
+			request.getDescription(false)
+		);
+		return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}	
 	
 }
